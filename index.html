@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ariasmin Suzafina </title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    overflow:hidden;
+    text-align:center;
+}
+
+h1{
+    font-family:'Cinzel',serif;
+    font-size:40px;
+    letter-spacing:4px;
+    opacity:0;
+    animation:fadeIn 4s forwards;
+}
+
+p{
+    opacity:0;
+    animation:fadeIn 4s forwards;
+    animation-delay:3s;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#ff4e8b;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    opacity:0;
+    animation:fadeIn 3s forwards;
+    animation-delay:6s;
+}
+
+@keyframes fadeIn{
+    to{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<h1>THIS IS YOU BIRTHDAY</h1>
+<p> 24 Februari 2004 ❤️ </p>
+
+<button onclick="startMovie()">Gift For u🎁</button>
+
+<audio autoplay>
+<source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mp3">
+</audio>
+
+<script>
+function startMovie(){
+    document.body.style.transition="1s";
+    document.body.style.opacity="0";
+    setTimeout(()=>{
+        window.location.href="gallery.html";
+    },1000);
+}
+</script>
+
+</body>
+</html>

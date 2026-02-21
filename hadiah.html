@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tiket Cinta 🎟️</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    text-align:center;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:60px;
+    margin-top:50px;
+}
+
+.ticket{
+    background:white;
+    color:#ff4e8b;
+    padding:30px;
+    margin:30px auto;
+    width:80%;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 0 40px #ff4e8b;
+    animation:zoom 2s ease forwards;
+}
+
+@keyframes zoom{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<h1>Selamat Ulang Tahun Sayang 🎉</h1>
+
+<div id="typingHadiah" style="font-size:28px; margin-top:20px;"></div>
+
+<div class="ticket">
+    <h2>Selamat Ulang Tahun Sayang 🎉</h2>
+    <h2>🎟️ TIKET HADIAH 🎟️</h2>
+    <h3>💝 2 Crate Valentine Fish it 💝</h3>
+    <p>Berlaku selamanya ❤️</p>
+</div>
+
+<script>
+const textHadiah = "Selamat Ulang Tahun, Sayangku ❤️";
+let j = 0;
+
+function typeHadiah(){
+    if(j < textHadiah.length){
+        document.getElementById("typingHadiah").innerHTML += textHadiah.charAt(j);
+        j++;
+        setTimeout(typeHadiah, 100);
+    }
+}
+setTimeout(typeHadiah, 1500);
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function createFirework(){
+    let x=Math.random()*canvas.width;
+    let y=Math.random()*canvas.height/2;
+    for(let i=0;i<60;i++){
+        particles.push({
+            x:x,
+            y:y,
+            radius:2,
+            color:`hsl(${Math.random()*360},100%,60%)`,
+            speedX:(Math.random()-0.5)*6,
+            speedY:(Math.random()-0.5)*6,
+            life:100
+        });
+    }
+}
+
+function animate(){
+    ctx.fillStyle="rgba(0,0,0,0.2)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach((p,i)=>{
+        p.x+=p.speedX;
+        p.y+=p.speedY;
+        p.life--;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.fill();
+        if(p.life<=0){
+            particles.splice(i,1);
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+setInterval(createFirework,1000);
+animate();
+</script>
+
+</body>
+</html>

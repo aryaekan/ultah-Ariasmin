@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>beautiful girl 💑</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    color:white;
+    text-align:center;
+}
+
+/* VIDEO FULLSCREEN */
+video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* Overlay gelap biar teks/foto jelas */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:-1;
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:60px;
+    margin-top:30px;
+}
+
+/* Efek Ketik */
+#typing{
+    font-size:24px;
+    margin-top:10px;
+    height:40px;
+    border-right:2px solid #ff4e8b;
+    display:inline-block;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+/* SLIDER FOTO */
+.slider{
+    width:260px;
+    height:360px;
+    margin:30px auto;
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:0 0 40px #ff4e8b;
+    position:relative;
+    background:rgba(0,0,0,0.3);
+}
+
+.slides{
+    display:flex;
+    transition:transform 0.6s ease-in-out;
+}
+
+.slides img{
+    width:260px;
+    height:360px;
+    object-fit:cover;
+}
+
+/* Tombol slider */
+.controls{
+    margin-bottom:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:#ff4e8b;
+    color:white;
+    cursor:pointer;
+    margin:5px;
+}
+</style>
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<h1>Beautiful Girl 💖</h1>
+<div id="typing"></div>
+
+<!-- SLIDER FOTO -->
+<div class="slider">
+    <div class="slides" id="slides">
+        <img src="foto1.jpeg">
+        <img src="foto2.jpeg">
+        <img src="foto3.jpeg">
+        <img src="foto4.jpeg">
+    </div>
+</div>
+
+<div class="controls">
+    <button onclick="prevSlide()">⬅</button>
+    <button onclick="nextSlide()">➡</button>
+</div>
+
+<button onclick="goNext()">Buka Hadiah 🎁</button>
+
+<script>
+// =====================
+// EFEK KETIK NAMA
+// =====================
+const text = "Ariasmin Suzafina ❤️"; // Nama pasangan
+let i = 0;
+
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80);
+    }
+}
+typeWriter();
+
+// =====================
+// SLIDER FOTO (AUTO + MANUAL)
+// =====================
+let index = 0;
+const slides = document.getElementById("slides");
+const totalSlides = slides.children.length;
+
+function updateSlide(){
+    slides.style.transform = `translateX(-${index * 260}px)`;
+}
+
+function nextSlide(){
+    index = (index + 1) % totalSlides;
+    updateSlide();
+}
+
+function prevSlide(){
+    index = (index - 1 + totalSlides) % totalSlides;
+    updateSlide();
+}
+
+// AUTO slide tiap 3 detik
+let autoSlide = setInterval(nextSlide, 3000);
+
+// Jika klik tombol, reset timer supaya auto tetap smooth
+document.querySelectorAll('.controls button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        clearInterval(autoSlide);
+        autoSlide = setInterval(nextSlide, 3000);
+    });
+});
+
+// =====================
+// TRANSISI KE HALAMAN HADIAH
+// =====================
+function goNext(){
+    document.body.style.transition="1s";
+    document.body.style.opacity="0";
+    setTimeout(()=>{
+        window.location.href="hadiah.html";
+    },1000);
+}
+</script>
+
+</body>
+</html>
